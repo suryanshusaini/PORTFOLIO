@@ -27,7 +27,7 @@ function Hero() {
         <div className="hero-image">
           <div className="profile-card">
             <div className="profile-img">
-              <i className="fas fa-user-graduate"></i>
+              <img src="/profile-pic.jpg" alt="Suryanshu Saini" />
             </div>
           </div>
         </div>
