@@ -2,7 +2,8 @@
 
 import React from "react";
 
-function Navbar() {
+// 1. Receive 'theme' and 'toggleTheme' as props
+function Navbar({ theme, toggleTheme }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -10,24 +11,9 @@ function Navbar() {
           <span className="logo-text">SS</span>
         </div>
 
-        {/* --- We've wrapped the menu and button in a new div --- */}
         <div className="nav-right">
           <div className="nav-menu" id="nav-menu">
-            <a href="#home" className="nav-link">
-              Home
-            </a>
-            <a href="#about" className="nav-link">
-              About
-            </a>
-            <a href="#skills" className="nav-link">
-              Skills
-            </a>
-            <a href="#projects" className="nav-link">
-              Projects
-            </a>
-            <a href="#contact" className="nav-link">
-              Contact
-            </a>
+            {/* ...your nav links... */}
           </div>
           <div className="nav-action">
             <a
@@ -37,6 +23,14 @@ function Navbar() {
             >
               Resume
             </a>
+            {/* 2. Add the theme toggle button */}
+            <button onClick={toggleTheme} className="theme-toggle">
+              {theme === "light" ? (
+                <i className="fas fa-moon"></i>
+              ) : (
+                <i className="fas fa-sun"></i>
+              )}
+            </button>
           </div>
         </div>
 
