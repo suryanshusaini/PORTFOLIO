@@ -23,7 +23,7 @@ function About() {
             <p>
               I'm a dedicated Computer Science Engineering student from Roorkee,
               currently in my 2nd year at Vellore Institute of Technology,
-              Andhra Pradesh. With a strong academic record (CGPA: 9.14), I'm
+              Andhra Pradesh. With a strong academic record (CGPA: 9.15), I'm
               passionate about technology and constantly learning new skills.
             </p>
             <p>
