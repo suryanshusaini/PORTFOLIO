@@ -22,7 +22,7 @@ function About() {
             <h3>Hello! I'm Suryanshu Saini</h3>
             <p>
               I'm a dedicated Computer Science Engineering student from Roorkee,
-              currently in my 2nd year at Vellore Institute of Technology,
+              currently in my 3rd year at Vellore Institute of Technology,
               Andhra Pradesh. With a strong academic record (CGPA: 9.15), I'm
               passionate about technology and constantly learning new skills.
             </p>
