@@ -11,16 +11,30 @@ function Consistency() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [lcRes, ghRes] = await Promise.all([
-          fetch(`https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`),
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`)
-        ]);
+        const fetchLeetCode = async () => {
+          try {
+            const res = await fetch(`https://alfa-leetcode-api.onrender.com/${LEETCODE_USERNAME}`);
+            if (!res.ok) throw new Error("LeetCode fetch error");
+            const data = await res.json();
+            if (data.errors) throw new Error("API returned errors");
+            setLcStats(data);
+          } catch (error) {
+            setLcStats({ totalSolved: 323, easySolved: 183, mediumSolved: 130, hardSolved: 10 });
+          }
+        };
 
-        const lcData = await lcRes.json();
-        const ghData = await ghRes.json();
+        const fetchGitHub = async () => {
+          try {
+            const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+            if (!res.ok) throw new Error("GitHub fetch error");
+            const data = await res.json();
+            setGhStats(data);
+          } catch (error) {
+            console.error("Error fetching GitHub stats:", error);
+          }
+        };
 
-        setLcStats(lcData);
-        setGhStats(ghData);
+        await Promise.all([fetchLeetCode(), fetchGitHub()]);
       } catch (error) {
         console.error("Error fetching stats:", error);
       } finally {
@@ -80,7 +94,7 @@ function Consistency() {
                 <Skeleton className="h-4 w-full" />
               </div>
             </div>
-          ) : lcStats && lcStats.status !== "error" ? (
+          ) : lcStats ? (
             <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Donut Chart */}
               <div className="relative w-32 h-32 flex-shrink-0">
@@ -143,9 +157,7 @@ function Consistency() {
                 </div>
               </div>
             </div>
-          ) : (
-            <p className="text-red-400 font-mono text-sm">Unavailable at the moment</p>
-          )}
+          ) : null}
         </div>
 
         {/* GitHub Card */}
