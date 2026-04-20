@@ -1,90 +1,47 @@
-// src/components/Skills.jsx
-
 import React from "react";
-import { useInView } from "react-intersection-observer";
-// 1. Import the CountUp component
-import CountUp from "react-countup";
 
-const skillsData = {
-  languages: [
-    { name: "Java", percentage: 80 },
-    { name: "Python", percentage: 75 },
-    { name: "JavaScript", percentage: 70 },
-  ],
-  webTech: [
-    { name: "HTML", percentage: 85 },
-    { name: "CSS", percentage: 80 },
-    { name: "SQL", percentage: 70 },
-  ],
-  other: [
-    { name: "Data Structures & Algorithms", percentage: 75 },
-    { name: "Artificial Intelligence", percentage: 70 },
-  ],
-};
+const mainSkills = [
+  "MERN Stack",
+  "Java",
+  "Python",
+  "SQL",
+  "Data Structures & Algorithms"
+];
 
-// We will update the SkillItem helper component
-const SkillItem = ({ name, percentage, inView }) => (
-  <div className="skill-item">
-    <div className="skill-info">
-      <span>{name}</span>
-      {/* 2. Replace the static percentage with the animated one */}
-      <span>{inView ? <CountUp end={percentage} duration={2} /> : 0}%</span>
-    </div>
-    <div className="skill-bar">
-      <div
-        className="skill-progress"
-        style={{ width: inView ? `${percentage}%` : "0%" }}
-      ></div>
-    </div>
-  </div>
-);
+const secondarySkills = [
+  "HTML5", "CSS3", "JavaScript (ES6+)", "React.js", "Node.js", "Express.js", "MongoDB", "Git & GitHub", "Tailwind CSS", "REST APIs"
+];
 
 function Skills() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
-    <section id="skills" className="skills" ref={ref}>
-      <div className="container">
-        <h2 className="section-title">Skills & Technologies</h2>
-        <div className="skills-grid">
-          <div className="skill-category">
-            <h3>Programming Languages</h3>
-            {skillsData.languages.map((skill) => (
-              <SkillItem
-                key={skill.name}
-                name={skill.name}
-                percentage={skill.percentage}
-                inView={inView}
-              />
-            ))}
-          </div>
+    <section id="skills" className="section-container bg-navy-800 rounded-lg my-12 shadow-2xl border border-navy-700">
+      <h2 className="section-title">Core Competencies</h2>
+      
+      <div className="mb-12">
+        <h3 className="text-xl font-mono text-accent mb-6">Primary Stack</h3>
+        <div className="flex flex-wrap gap-4">
+          {mainSkills.map((skill, index) => (
+            <div 
+              key={index}
+              className="px-6 py-3 bg-navy-900 border border-accent rounded-full text-slate-100 font-semibold shadow-[0_0_10px_rgba(100,255,218,0.1)] hover:shadow-[0_0_15px_rgba(100,255,218,0.3)] hover:-translate-y-1 transition-all duration-300 md:text-lg"
+            >
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
 
-          <div className="skill-category">
-            <h3>Web Technologies</h3>
-            {skillsData.webTech.map((skill) => (
-              <SkillItem
-                key={skill.name}
-                name={skill.name}
-                percentage={skill.percentage}
-                inView={inView}
-              />
-            ))}
-          </div>
-
-          <div className="skill-category">
-            <h3>Other Skills</h3>
-            {skillsData.other.map((skill) => (
-              <SkillItem
-                key={skill.name}
-                name={skill.name}
-                percentage={skill.percentage}
-                inView={inView}
-              />
-            ))}
-          </div>
+      <div>
+        <h3 className="text-xl font-mono text-slate-400 mb-6">Additional Tools & Technologies</h3>
+        <div className="flex flex-wrap gap-3">
+          {secondarySkills.map((skill, index) => (
+            <div 
+              key={index}
+              className="px-4 py-2 bg-navy-700 rounded-full text-slate-300 text-sm hover:text-accent hover:bg-navy-900 transition-colors"
+            >
+              {skill}
+            </div>
+          ))}
         </div>
       </div>
     </section>
