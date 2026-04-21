@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import DecryptText from "./DecryptText";
 
 function Hero() {
   return (
@@ -14,7 +15,7 @@ function Hero() {
           Hi, my name is
         </p>
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-          Suryanshu Saini.
+          <DecryptText text="Suryanshu Saini." delay={2500} />
         </h1>
         <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-neutral-400 mb-8 tracking-tight">
           I build robust software solutions.
