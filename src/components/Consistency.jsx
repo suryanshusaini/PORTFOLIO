@@ -3,14 +3,34 @@ import { motion } from "framer-motion";
 
 function Consistency() {
   const GITHUB_USERNAME = "suryanshusaini";
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLeetCodeLoading, setIsLeetCodeLoading] = useState(true);
+  const [isGithubLoading, setIsGithubLoading] = useState(true);
+  const [repos, setRepos] = useState([]);
 
   useEffect(() => {
+    // Keep a simulated loading state for leetcode since it's an image load
     const timer = setTimeout(() => {
-      setIsLoading(false);
+      setIsLeetCodeLoading(false);
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const fetchRepos = async () => {
+      try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=4`);
+        if (response.ok) {
+          const data = await response.json();
+          setRepos(data);
+        }
+      } catch (error) {
+        console.error("Error fetching github repos:", error);
+      } finally {
+        setIsGithubLoading(false);
+      }
+    };
+    fetchRepos();
+  }, [GITHUB_USERNAME]);
 
   return (
     <section id="consistency" className="section-container">
@@ -45,7 +65,7 @@ function Consistency() {
             </a>
           </div>
           <div className="w-full flex-grow flex items-center justify-center">
-            {isLoading ? (
+            {isLeetCodeLoading ? (
               <div className="animate-pulse flex items-center gap-6 w-full max-w-sm">
                 <div className="w-24 h-24 bg-neutral-800 rounded-full shrink-0"></div>
                 <div className="flex-1 space-y-4">
@@ -83,7 +103,7 @@ function Consistency() {
           </div>
           
           <div className="w-full flex-grow">
-            {isLoading ? (
+            {isGithubLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[1, 2, 3, 4].map(i => (
                   <div key={i} className="animate-pulse bg-neutral-800 rounded-lg h-28"></div>
@@ -91,57 +111,21 @@ function Consistency() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Repo 1 */}
-                <a href={`https://github.com/${GITHUB_USERNAME}/Nexus-Scholar-AI`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
-                    <i className="far fa-folder"></i> Nexus-Scholar-AI
-                  </h4>
-                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
-                    AI tool for research paper clustering and interactive chatbot mapping.
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript
-                  </div>
-                </a>
-                
-                {/* Repo 2 */}
-                <a href={`https://github.com/${GITHUB_USERNAME}/Dev-Portfolio`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
-                    <i className="far fa-folder"></i> Dev-Portfolio
-                  </h4>
-                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
-                    A sleek, interactive React portfolio for showcasing software engineering projects.
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-blue-400"></span> React
-                  </div>
-                </a>
-                
-                {/* Repo 3 */}
-                <a href={`https://github.com/${GITHUB_USERNAME}/Algorithm-Visualizer`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
-                    <i className="far fa-folder"></i> Algo-Visuals
-                  </h4>
-                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
-                    Interactive visualization tool for common sorting algorithms.
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript
-                  </div>
-                </a>
-
-                {/* Repo 4 */}
-                <a href={`https://github.com/${GITHUB_USERNAME}/Data-Structures`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
-                    <i className="far fa-folder"></i> Data-Structures
-                  </h4>
-                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
-                    Core repository of solved technical interview challenges.
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-blue-500"></span> C++
-                  </div>
-                </a>
+                {repos.map((repo) => (
+                  <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
+                    <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
+                      <i className="far fa-folder"></i> {repo.name}
+                    </h4>
+                    <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
+                      {repo.description || "No description provided."}
+                    </p>
+                    {repo.language && (
+                      <div className="mt-auto flex items-center gap-2 text-xs text-neutral-500 font-mono">
+                        <span className={`w-2 h-2 rounded-full ${repo.language === 'JavaScript' ? 'bg-yellow-400' : repo.language === 'Python' ? 'bg-blue-500' : repo.language === 'HTML' ? 'bg-orange-500' : 'bg-neutral-500'}`}></span> {repo.language}
+                      </div>
+                    )}
+                  </a>
+                ))}
               </div>
             )}
           </div>
