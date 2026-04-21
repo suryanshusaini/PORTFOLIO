@@ -3,6 +3,14 @@ import { motion } from "framer-motion";
 
 function Consistency() {
   const GITHUB_USERNAME = "suryanshusaini";
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section id="consistency" className="section-container">
@@ -17,7 +25,7 @@ function Consistency() {
       </motion.h2>
       <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
         
-        {/* LeetCode Card via Image */}
+        {/* LeetCode Card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,38 +45,105 @@ function Consistency() {
             </a>
           </div>
           <div className="w-full flex-grow flex items-center justify-center">
-            <img 
-              src="https://leetcard.jacoblin.cool/Suryanshu_Saini0808?theme=dark&font=Inter&ext=activity" 
-              alt="LeetCode Stats" 
-              className="w-full h-auto object-cover rounded-xl" 
-            />
+            {isLoading ? (
+              <div className="animate-pulse flex items-center gap-6 w-full max-w-sm">
+                <div className="w-24 h-24 bg-neutral-800 rounded-full shrink-0"></div>
+                <div className="flex-1 space-y-4">
+                  <div className="h-3 bg-neutral-800 rounded-md w-full"></div>
+                  <div className="h-3 bg-neutral-800 rounded-md w-5/6"></div>
+                  <div className="h-3 bg-neutral-800 rounded-md w-4/6"></div>
+                </div>
+              </div>
+            ) : (
+              <img 
+                src="https://leetcard.jacoblin.cool/Suryanshu_Saini0808?theme=dark&font=Inter&ext=activity" 
+                alt="LeetCode Stats" 
+                className="w-full h-auto object-cover rounded-xl" 
+              />
+            )}
           </div>
         </motion.div>
 
-        {/* GitHub Card */}
+        {/* GitHub Card - Top Repositories Grid */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-          className="bg-neutral-900 rounded-lg p-8 lg:p-12 border border-neutral-800 hover:border-neutral-500 transition-all duration-300 flex flex-col justify-between h-full"
+          className="bg-neutral-900 rounded-lg p-8 lg:p-12 border border-neutral-800 hover:border-neutral-500 transition-all duration-300 flex flex-col h-full"
         >
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-2xl font-bold text-white flex items-center gap-3">
               <i className="fab fa-github text-3xl"></i>
-              GitHub Activity
+              Top Repositories
             </h3>
-            <a href={`https://github.com/${GITHUB_USERNAME}`} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+            <a href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
               <i className="fas fa-external-link-alt"></i>
             </a>
           </div>
           
-          <div className="w-full flex-grow flex items-center justify-center">
-            <img 
-              src={`https://github-readme-stats.vercel.app/api?username=${GITHUB_USERNAME}&show_icons=true&theme=transparent&hide_border=true&title_color=ffffff&text_color=a3a3a3&icon_color=ffffff&bg_color=transparent`} 
-              alt="GitHub Stats" 
-              className="w-full h-auto object-cover" 
-            />
+          <div className="w-full flex-grow">
+            {isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="animate-pulse bg-neutral-800 rounded-lg h-28"></div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Repo 1 */}
+                <a href={`https://github.com/${GITHUB_USERNAME}/Nexus-Scholar-AI`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
+                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
+                    <i className="far fa-folder"></i> Nexus-Scholar-AI
+                  </h4>
+                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
+                    AI tool for research paper clustering and interactive chatbot mapping.
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript
+                  </div>
+                </a>
+                
+                {/* Repo 2 */}
+                <a href={`https://github.com/${GITHUB_USERNAME}/Dev-Portfolio`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
+                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
+                    <i className="far fa-folder"></i> Dev-Portfolio
+                  </h4>
+                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
+                    A sleek, interactive React portfolio for showcasing software engineering projects.
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-blue-400"></span> React
+                  </div>
+                </a>
+                
+                {/* Repo 3 */}
+                <a href={`https://github.com/${GITHUB_USERNAME}/Algorithm-Visualizer`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
+                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
+                    <i className="far fa-folder"></i> Algo-Visuals
+                  </h4>
+                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
+                    Interactive visualization tool for common sorting algorithms.
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript
+                  </div>
+                </a>
+
+                {/* Repo 4 */}
+                <a href={`https://github.com/${GITHUB_USERNAME}/Data-Structures`} target="_blank" rel="noopener noreferrer" className="block bg-neutral-950 border border-neutral-800 rounded-lg p-4 hover:border-neutral-500 transition-colors group">
+                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 flex items-center gap-2 text-sm">
+                    <i className="far fa-folder"></i> Data-Structures
+                  </h4>
+                  <p className="text-neutral-400 text-xs mb-4 line-clamp-2">
+                    Core repository of solved technical interview challenges.
+                  </p>
+                  <div className="flex items-center gap-2 text-xs text-neutral-500 font-mono">
+                    <span className="w-2 h-2 rounded-full bg-blue-500"></span> C++
+                  </div>
+                </a>
+              </div>
+            )}
           </div>
         </motion.div>
 

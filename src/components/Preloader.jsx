@@ -11,17 +11,18 @@ function Preloader() {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-neutral-950 pointer-events-none"
     >
       <div className="relative flex flex-col items-center">
-        {/* Pulsing SS Logo */}
+        {/* Developer Tag Typography */}
         <motion.div
-          animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-5xl font-mono text-white font-bold tracking-tighter"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-3xl sm:text-4xl md:text-5xl font-mono text-white font-medium tracking-tight mb-6"
         >
-          SS.
+          &lt;Suryanshu Saini /&gt;
         </motion.div>
         
-        {/* Clean Progress Line */}
-        <div className="mt-8 w-48 h-[2px] bg-neutral-800 overflow-hidden rounded-full">
+        {/* Stark Progress Line */}
+        <div className="w-64 sm:w-80 h-[1px] overflow-hidden">
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
