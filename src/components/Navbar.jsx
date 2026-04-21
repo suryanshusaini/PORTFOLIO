@@ -1,45 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <nav className="fixed w-full top-0 z-50 bg-navy-900 bg-opacity-90 backdrop-blur-md border-b border-navy-700">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#home" className="text-2xl font-bold text-accent font-mono tracking-tighter">
-          SS.
+    <motion.nav 
+      initial={{ y: -100, opacity: 0, x: "-50%" }}
+      animate={{ y: 0, opacity: 1, x: "-50%" }}
+      transition={{ duration: 0.8, delay: 2, ease: "easeOut" }}
+      className="fixed top-6 left-1/2 z-50 flex items-center justify-center px-6 py-3 rounded-full backdrop-blur-md bg-slate-900/60 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-11/12 max-w-md md:max-w-xl"
+    >
+      <div className="flex items-center gap-4 md:gap-8 text-sm font-mono text-slate-300">
+        <a href="#about" className="hover:text-accent transition-colors">About</a>
+        <a href="#skills" className="hover:text-accent transition-colors hidden sm:block">Skills</a>
+        <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
+        <a href="#contact" className="hover:text-accent transition-colors hidden sm:block">Contact</a>
+        
+        <a href="/suryanshu-saini-resume.pdf" download className="bg-white/5 border border-white/10 px-4 py-1.5 rounded-full hover:bg-white/10 hover:text-accent transition-all duration-300">
+          Resume
         </a>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          <div className="flex gap-6 font-mono text-sm">
-            <a href="#about" className="text-slate-300 hover:text-accent"><span className="text-accent">01.</span> About</a>
-            <a href="#skills" className="text-slate-300 hover:text-accent"><span className="text-accent">02.</span> Skills</a>
-            <a href="#projects" className="text-slate-300 hover:text-accent"><span className="text-accent">03.</span> Projects</a>
-            <a href="#contact" className="text-slate-300 hover:text-accent"><span className="text-accent">04.</span> Contact</a>
-          </div>
-          <a href="/suryanshu-saini-resume.pdf" download className="btn-primary py-2 px-4 text-xs font-mono">
-            Resume
-          </a>
-        </div>
-
-        {/* Mobile Hamburger */}
-        <button className="md:hidden text-accent text-2xl" onClick={() => setIsOpen(!isOpen)}>
-          <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
-        </button>
       </div>
-
-      {/* Mobile Menu Dropdown */}
-      {isOpen && (
-        <div className="md:hidden bg-navy-800 border-b border-navy-700 py-4 px-6 flex flex-col gap-4 font-mono text-center">
-          <a href="#about" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-accent block">About</a>
-          <a href="#skills" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-accent block">Skills</a>
-          <a href="#projects" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-accent block">Projects</a>
-          <a href="#contact" onClick={() => setIsOpen(false)} className="text-slate-300 hover:text-accent block">Contact</a>
-          <a href="/resume.pdf" onClick={() => setIsOpen(false)} className="text-accent underline block mt-2">Resume</a>
-        </div>
-      )}
-    </nav>
+    </motion.nav>
   );
 }
 
