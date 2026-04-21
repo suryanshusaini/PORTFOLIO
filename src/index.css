@@ -31,10 +31,10 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-transparent border-2 border-accent text-accent rounded-md hover:bg-accent hover:bg-opacity-10 transition-colors font-mono text-sm uppercase tracking-wider;
+    @apply px-6 py-3 bg-transparent border-2 border-accent text-accent rounded-full hover:bg-accent hover:bg-opacity-10 transition-colors font-mono text-sm uppercase tracking-wider;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-navy-800 text-slate-300 border-2 border-transparent rounded-md hover:bg-navy-700 hover:text-accent transition-colors font-mono text-sm uppercase tracking-wider;
+    @apply px-6 py-3 bg-navy-800 text-slate-300 border border-slate-700/50 rounded-full hover:bg-navy-700 hover:text-accent transition-colors font-mono text-sm uppercase tracking-wider shadow-lg;
   }
 }
