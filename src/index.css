@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-navy-900 text-slate-300 antialiased font-sans;
+    @apply bg-neutral-950 text-neutral-400 antialiased font-sans flex flex-col min-h-screen text-base leading-relaxed;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply text-slate-100 font-bold tracking-tight;
+    @apply text-white font-bold tracking-tight;
   }
 
   a {
@@ -22,19 +22,19 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-slate-100 mb-12 flex items-center;
+    @apply text-3xl md:text-4xl font-bold text-white mb-12 flex items-center tracking-tight;
   }
   
   .section-title::after {
     content: "";
-    @apply block h-px bg-navy-700 w-full ml-6 bg-opacity-50;
+    @apply block h-px bg-neutral-800 w-full ml-6;
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-transparent border-2 border-accent text-accent rounded-full hover:bg-accent hover:bg-opacity-10 transition-colors font-mono text-sm uppercase tracking-wider;
+    @apply px-6 py-3 bg-white text-neutral-950 border border-white rounded-md hover:bg-neutral-200 transition-all font-mono text-sm uppercase tracking-wider font-semibold;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-navy-800 text-slate-300 border border-slate-700/50 rounded-full hover:bg-navy-700 hover:text-accent transition-colors font-mono text-sm uppercase tracking-wider shadow-lg;
+    @apply px-6 py-3 bg-neutral-900 text-neutral-300 border border-neutral-800 rounded-md hover:border-neutral-400 hover:text-white transition-all font-mono text-sm uppercase tracking-wider;
   }
 }

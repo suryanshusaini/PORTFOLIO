@@ -18,7 +18,7 @@ function Projects() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
         className="section-title"
       >
         Notable Projects
@@ -30,25 +30,25 @@ function Projects() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 * index }}
+            transition={{ duration: 0.6, delay: 0.2 * index, ease: 'easeOut' }}
             key={index} 
-            className="bg-slate-800/40 backdrop-blur-md rounded-3xl p-10 md:p-12 border border-slate-700/50 transition-all duration-300 group flex flex-col justify-between min-h-[350px] hover:border-slate-600/50 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(100,255,218,0.1)]"
+            className="bg-neutral-900 border border-neutral-800 rounded-lg p-10 md:p-12 transition-all duration-300 group flex flex-col justify-between min-h-[350px] hover:border-neutral-500"
           >
             <div>
               <div className="flex justify-between items-center mb-10">
-                <i className="fas fa-folder-open text-4xl text-accent"></i>
-                <a href={project.link} className="text-slate-400 hover:text-accent transition-colors">
+                <i className="fas fa-folder-open text-4xl text-white"></i>
+                <a href={project.link} className="text-neutral-500 hover:text-white transition-colors">
                   <i className="fas fa-external-link-alt text-xl"></i>
                 </a>
               </div>
-              <h3 className="text-2xl font-bold text-slate-100 mb-5 group-hover:text-accent transition-colors">{project.title}</h3>
-              <p className="text-slate-400 mb-8 leading-relaxed">
+              <h3 className="text-2xl font-bold text-white mb-5 group-hover:text-neutral-300 transition-colors">{project.title}</h3>
+              <p className="text-neutral-400 mb-8 leading-relaxed">
                 {project.description}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 mt-auto">
               {project.techStack.map((tech, i) => (
-                <span key={i} className="text-xs font-mono text-accent bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full">
+                <span key={i} className="text-xs font-mono text-neutral-300 bg-neutral-950 border border-neutral-800 px-3 py-1.5 rounded-md">
                   {tech}
                 </span>
               ))}
