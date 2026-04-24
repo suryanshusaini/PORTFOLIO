@@ -19,14 +19,6 @@ const LC_CAL_THEME = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GitHub fallback repos (silent 403 fallback)
-// ─────────────────────────────────────────────────────────────────────────────
-const FALLBACK_REPOS = [
-  { id: 1, name: "yatri_mitra",           html_url: "https://github.com/suryanshusaini/yatri_mitra", description: "Collaborative travel and transit application",            language: "JavaScript" },
-  { id: 2, name: "ai-interview-platform", html_url: "https://github.com/suryanshusaini",              description: "AI-driven interview preparation platform",               language: "React"      },
-  { id: 3, name: "developer-portfolio",   html_url: "https://github.com/suryanshusaini",              description: "High-performance React portfolio with custom animations", language: "React"      },
-  { id: 4, name: "dsa-java",              html_url: "https://github.com/suryanshusaini",              description: "Core repository of solved technical interview algorithms", language: "Java"       },
-];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -69,8 +61,9 @@ function Consistency() {
   const [lcError,     setLCError]     = useState(false);
 
   // ── GitHub state ──────────────────────────────────────────────
-  const [repos,       setRepos]       = useState([]);
-  const [ghLoading,   setGHLoading]   = useState(true);
+  const [repos,     setRepos]     = useState([]);
+  const [ghLoading, setGHLoading] = useState(true);
+  const [ghError,   setGHError]   = useState(false);
 
   // ── Effects ──────────────────────────────────────────────────
 
@@ -112,18 +105,19 @@ function Consistency() {
     run();
   }, []);
 
-  // GitHub repos — silent fallback on 403
+  // GitHub repos — API-only, authentic error on failure
   useEffect(() => {
     (async () => {
       try {
         const res = await fetch(
           `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=4`
         );
-        if (!res.ok) { setRepos(FALLBACK_REPOS); return; }
+        if (!res.ok) throw new Error(`GitHub API ${res.status}`);
         const data = await res.json();
-        setRepos(data.length ? data : FALLBACK_REPOS);
-      } catch {
-        setRepos(FALLBACK_REPOS);
+        setRepos(data);
+      } catch (err) {
+        console.error("GitHub Repos Error:", err);
+        setGHError(true);
       } finally {
         setGHLoading(false);
       }
@@ -401,10 +395,34 @@ function Consistency() {
           {/* Repo grid */}
           <div className="flex-grow flex items-center justify-center">
             {ghLoading ? (
+              /* Skeleton */
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[1,2,3,4].map(i => <div key={i} className="animate-pulse bg-neutral-800 rounded-lg h-28" />)}
               </div>
+            ) : ghError ? (
+              /* Authentic error UI */
+              <div className="flex flex-col items-center justify-center gap-5 text-center py-6 w-full h-full">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full border border-neutral-700 text-neutral-500 shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p className="text-neutral-300 text-sm font-mono font-semibold">Live Data Unavailable</p>
+                  <p className="text-neutral-600 text-xs leading-relaxed max-w-[240px]">
+                    GitHub API limit reached.<br />Live projects temporarily unavailable.
+                  </p>
+                </div>
+                <a
+                  href={`https://github.com/${GITHUB_USERNAME}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-5 py-2 text-sm font-mono text-neutral-300 border border-neutral-700 rounded-lg hover:border-[#22c55e]/60 hover:text-white transition-all duration-200"
+                >
+                  <i className="fab fa-github" /> View All Projects on GitHub
+                </a>
+              </div>
             ) : (
+              /* Live repos */
               <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {repos.map(repo => (
                   <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer"
