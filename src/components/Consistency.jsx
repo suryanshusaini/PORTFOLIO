@@ -171,7 +171,7 @@ function Consistency() {
         Consistency &amp; Metrics
       </motion.h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+      <div className="flex flex-col gap-8 w-full">
 
         {/* ══════════════════════════════════════════════════════════
             ROW 1 — GitHub Activity Calendar (full width)
@@ -180,7 +180,7 @@ function Consistency() {
           delay={0.1}
           glow="rgba(34,197,94,0.12)"
           border="hover:border-[#22c55e]/30"
-          className="lg:col-span-2"
+          className="w-full"
         >
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
@@ -209,8 +209,63 @@ function Consistency() {
           </div>
         </Card>
 
+        {/* ══ Row 2: LeetCode Activity Calendar (full width) ══ */}
+        <Card
+          delay={0.15}
+          glow="rgba(255,161,22,0.10)"
+          border="hover:border-[#FFA116]/20"
+          className="w-full"
+        >
+          {/* Header */}
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-bold text-white flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-[#FFA116]">
+                <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125 2.51v.006a5.278 5.278 0 0 0 1.259 2.457l3.197 3.208a5.269 5.269 0 0 0 2.213 1.34 5.356 5.356 0 0 0 2.607-.03 5.27 5.27 0 0 0 2.05-1.22l3.415-3.393a5.269 5.269 0 0 0 1.36-2.127 5.347 5.347 0 0 0 .1-2.483 5.267 5.267 0 0 0-1.1-2.091L13.483 0z" />
+              </svg>
+              LeetCode Activity
+            </h3>
+            <a href={LC_PROFILE} target="_blank" rel="noopener noreferrer"
+              className="text-neutral-500 hover:text-white transition-colors text-sm">
+              <i className="fas fa-external-link-alt" />
+            </a>
+          </div>
+          {/* Calendar */}
+          <div className="w-full overflow-x-auto flex items-center justify-center py-2">
+            {lcLoading ? (
+              <div className="w-full flex flex-col gap-2 animate-pulse">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="h-3 bg-neutral-800 rounded-full" style={{ width: `${70 + (i % 3) * 10}%` }} />
+                ))}
+              </div>
+            ) : lcCal.length > 0 ? (
+              <ActivityCalendar
+                data={lcCal}
+                colorScheme="dark"
+                theme={LC_CAL_THEME}
+                blockSize={15}
+                blockRadius={3}
+                blockMargin={4}
+                fontSize={14}
+                labels={{ totalCount: "{{count}} submissions in the past year" }}
+                style={{ color: "#6b7280" }}
+              />
+            ) : (
+              <div className="flex flex-col items-center gap-3 py-8 text-center">
+                <p className="text-neutral-500 text-sm font-mono">Calendar unavailable</p>
+                <a href={LC_PROFILE} target="_blank" rel="noopener noreferrer"
+                  className="px-4 py-1.5 text-xs font-mono text-neutral-400 border border-neutral-700 rounded-lg hover:border-neutral-500 hover:text-white transition-all">
+                  View on LeetCode ↗
+                </a>
+              </div>
+            )}
+          </div>
+        </Card>
+
+        {/* ══ Row 3: Side-by-side split ══ */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+
         {/* ══════════════════════════════════════════════════════════
-            ROW 2 LEFT — LeetCode Stats Card
+            ROW 3 LEFT — LeetCode Stats Card
         ══════════════════════════════════════════════════════════ */}
         <Card
           delay={0.2}
@@ -316,32 +371,14 @@ function Consistency() {
                   <span className="text-white font-semibold">{rank}</span>
                 </div>
 
-                {/* LeetCode Activity Calendar */}
-                {lcCal.length > 0 && (
-                  <div className="w-full flex flex-col gap-2">
-                    <p className="text-[11px] font-mono text-neutral-600 tracking-widest">ACTIVITY</p>
-                    <div className="flex-grow flex items-center justify-center w-full min-h-[100px] overflow-hidden overflow-x-auto">
-                      <ActivityCalendar
-                        data={lcCal}
-                        colorScheme="dark"
-                        theme={LC_CAL_THEME}
-                        blockSize={10}
-                        blockRadius={2}
-                        blockMargin={3}
-                        fontSize={10}
-                        hideTotalCount
-                        style={{ color: "#6b7280" }}
-                      />
-                    </div>
-                  </div>
-                )}
+
               </div>
             )}
           </div>
         </Card>
 
         {/* ══════════════════════════════════════════════════════════
-            ROW 2 RIGHT — Top Repositories
+            ROW 3 RIGHT — Top Repositories
         ══════════════════════════════════════════════════════════ */}
         <Card
           delay={0.3}
@@ -390,6 +427,8 @@ function Consistency() {
             )}
           </div>
         </Card>
+
+        </div> {/* end row-3 grid */}
 
       </div>
     </section>
