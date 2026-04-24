@@ -17,10 +17,10 @@ function GridBackground() {
 
   return (
     <div 
-      className="fixed inset-0 z-[-50] pointer-events-none bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+      className="fixed inset-0 z-[-50] pointer-events-none bg-[radial-gradient(circle,#80808033_1px,transparent_1px)] bg-[size:32px_32px]"
       style={{
-        maskImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 600px)`,
-        WebkitMaskImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 600px)`
+        maskImage: `radial-gradient(ellipse 900px 700px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, black 30%, transparent 80%)`,
+        WebkitMaskImage: `radial-gradient(ellipse 900px 700px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, black 30%, transparent 80%)`
       }}
     />
   );
