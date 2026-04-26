@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 function About() {
   return (
     <section id="about" className="section-container">
-      <motion.h2 
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -13,9 +13,9 @@ function About() {
       >
         About Me
       </motion.h2>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -30,7 +30,7 @@ function About() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -39,7 +39,7 @@ function About() {
         >
           <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-lg transition-all duration-300 hover:border-neutral-500">
             <h4 className="text-4xl font-bold text-white mb-2">9.04</h4>
-            <p className="text-neutral-400 font-mono text-xs md:text-sm uppercase tracking-wider">Current CGPA <br/><span className="text-[10px] text-neutral-500">(Up to 5th Semester)</span></p>
+            <p className="text-neutral-400 font-mono text-xs md:text-sm uppercase tracking-wider">Current CGPA <br /><span className="text-[10px] text-neutral-500">(Up to 5th Semester)</span></p>
           </div>
           <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-lg transition-all duration-300 hover:border-neutral-500">
             <h4 className="text-3xl font-bold text-white mb-2">B.Tech CSE</h4>
@@ -54,7 +54,7 @@ function About() {
 
       {/* Interactive Journey Timeline */}
       <div className="mt-24 md:mt-32 max-w-3xl relative">
-        <motion.h3 
+        <motion.h3
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -63,10 +63,10 @@ function About() {
         >
           Journey & Milestones
         </motion.h3>
-        
+
         <div className="relative pl-8 md:pl-12 border-l border-neutral-800 space-y-16 pb-8">
           {/* Illuminating Track Line */}
-          <motion.div 
+          <motion.div
             initial={{ height: 0 }}
             whileInView={{ height: "100%" }}
             viewport={{ once: true, margin: "-100px" }}
@@ -80,7 +80,7 @@ function About() {
             { date: "Aug 2025", desc: "Participated in the Amazon Hackathon, competing to build robust software solutions under a strict time limit." },
             { date: "Current", desc: "Actively seeking Software Engineering internship opportunities while consistently grinding Data Structures & Algorithms (323+ LeetCode solved) and mastering Full-Stack web development." }
           ].map((milestone, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
