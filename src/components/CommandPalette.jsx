@@ -39,34 +39,64 @@ function CommandPalette({ isOpen, setIsOpen }) {
     setIsOpen(false);
   };
 
+  const scrollTo = (id) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   const actions = [
     {
-      id: 'projects',
-      label: 'Go to Projects',
-      icon: 'fas fa-folder-open',
-      action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+      id: 'about',
+      label: 'About Me',
+      icon: 'fas fa-user',
+      action: () => scrollTo('about'),
     },
     {
       id: 'skills',
-      label: 'Go to Skills',
+      label: 'Technical Skills',
       icon: 'fas fa-code',
-      action: () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })
+      action: () => scrollTo('skills'),
+    },
+    {
+      id: 'projects',
+      label: 'Top Projects',
+      icon: 'fas fa-folder-open',
+      action: () => scrollTo('projects'),
+    },
+    {
+      id: 'metrics',
+      label: 'Consistency & Metrics',
+      icon: 'fas fa-chart-line',
+      action: () => scrollTo('consistency'),
+    },
+    {
+      id: 'contact',
+      label: 'Contact Info',
+      icon: 'fas fa-envelope',
+      action: () => scrollTo('contact'),
     },
     {
       id: 'email',
       label: 'Copy Email Address',
-      icon: 'fas fa-envelope',
-      action: () => {
-        navigator.clipboard.writeText('suryanshu.saini@example.com');
-        alert('Email address copied to clipboard!');
-      }
+      icon: 'fas fa-copy',
+      action: () => navigator.clipboard.writeText('suryanshusaini2009@gmail.com'),
     },
     {
-      id: 'source',
-      label: 'View Source Code',
+      id: 'github',
+      label: 'GitHub Profile',
       icon: 'fab fa-github',
-      action: () => window.open('https://github.com/suryanshusaini/PORTFOLIO', '_blank')
-    }
+      action: () => window.open('https://github.com/suryanshusaini', '_blank'),
+    },
+    {
+      id: 'leetcode',
+      label: 'LeetCode Profile',
+      icon: 'fas fa-terminal',
+      action: () => window.open('https://leetcode.com/u/Suryanshu_Saini0808/', '_blank'),
+    },
+    {
+      id: 'resume',
+      label: 'View Resume',
+      icon: 'fas fa-file-alt',
+      action: () => window.open('https://drive.google.com/file/d/1v6IkFw4dHvPhL_uH_IEpLXTZOSYampZy/view?usp=drive_link', '_blank'),
+    },
   ];
 
   const filteredActions = actions.filter(a => a.label.toLowerCase().includes(search.toLowerCase()));

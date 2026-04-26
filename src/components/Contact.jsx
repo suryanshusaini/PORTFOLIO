@@ -17,7 +17,7 @@ function Contact() {
           I'm actively looking for new opportunities and engaging projects. Whether you have an open role, a project idea, or just want to say hi, my inbox is always open.
         </p>
         
-        <a href="mailto:suryanshu.saini@example.com" className="btn-primary inline-block mb-16 text-base md:text-lg px-10 py-5 hover:-translate-y-1 transform transition-transform">
+        <a href="mailto:suryanshusaini2009@gmail.com" className="btn-primary inline-block mb-16 text-base md:text-lg px-10 py-5 hover:-translate-y-1 transform transition-transform">
           Say Hello
         </a>
 
