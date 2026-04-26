@@ -45,6 +45,9 @@ if (Date.now() - lastFetched < POLL_MS) return; // skip if < 60s
 - All interactive cards use `transform: translateY(-4px)` on hover — **no width/height/margin changes** means zero layout reflows.
 - Every transition is explicitly typed (`transition-[transform,box-shadow,border-color]`) with a `200ms ease-out` budget and `will-change: transform` on animated SVG nodes.
 
+### 🔍 Full-Portfolio Command Palette
+Press `⌘K` (Mac) or `Ctrl+K` (Windows) to open a live-search command palette that indexes every section of the portfolio. Actions include smooth-scrolling to any section, opening GitHub / LeetCode profiles in a new tab, copying the email address to clipboard, and opening the live Resume — all keyboard-driven.
+
 ### 🛡️ Professional Error States
 Every API failure is handled with a branded **"Service Interruption"** UI — a muted orange warning icon, clear messaging, and a prominent "View Profile" button — so the portfolio always looks intentional, never broken.
 
@@ -88,8 +91,9 @@ cd PORTFOLIO
 # 2. Install dependencies
 npm install
 
-# 3. Create your environment file
-cp .env.example .env   # then edit with your usernames
+# 3. Create your environment file manually
+echo "VITE_GITHUB_USERNAME=your_github_username" > .env
+echo "VITE_LEETCODE_USERNAME=your_leetcode_username" >> .env
 
 # 4. Start the development server
 npm run dev
@@ -113,11 +117,14 @@ PORTFOLIO/
 ├── public/                 # Static assets
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.jsx      # Floating glassmorphism nav + live Resume link
-│   │   ├── About.jsx       # Hero / introduction section
-│   │   ├── Projects.jsx    # Project showcase grid
-│   │   ├── Consistency.jsx # Real-time GitHub + LeetCode dashboard
-│   │   └── Preloader.jsx   # Animated entry preloader
+│   │   ├── Navbar.jsx          # Floating glassmorphism nav + live Resume link
+│   │   ├── CommandPalette.jsx  # ⌘K search — full 9-item portfolio index
+│   │   ├── About.jsx           # Hero / introduction section
+│   │   ├── Skills.jsx          # Technical skills grid
+│   │   ├── Projects.jsx        # Project showcase grid
+│   │   ├── Consistency.jsx     # Real-time GitHub + LeetCode dashboard
+│   │   ├── Contact.jsx         # Contact section with real Gmail mailto
+│   │   └── Preloader.jsx       # Animated entry preloader
 │   ├── App.jsx
 │   └── main.jsx
 ├── index.html              # SS monogram favicon + title

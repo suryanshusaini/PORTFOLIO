@@ -182,7 +182,7 @@ function Consistency() {
   const medium = lcStats?.data?.difficulty?.medium?.solved || 0;
   const hard   = lcStats?.data?.difficulty?.hard?.solved   || 0;
   const accept = lcStats?.data?.stats?.acceptanceRate      || "—";
-  const rank   = lcStats?.data?.stats?.ranking                 || "—";
+  const rank   = lcStats?.data?.stats?.ranking ? Number(lcStats.data.stats.ranking).toLocaleString() : '—';
   const dotOffset = total
     ? circ * (1 - Math.min(total / Math.max(total * 1.4, 400), 1))
     : circ;
