@@ -38,9 +38,10 @@ function Navbar({ onOpenPalette }) {
         </button>
 
         <a
-          href="/suryanshu-saini-resume.pdf"
-          download
-          className="bg-neutral-900 border border-neutral-800 px-5 py-2 rounded-full hover:border-neutral-400 hover:text-white transition-all duration-300 font-semibold tracking-wide ml-2 sm:ml-0"
+          href="https://drive.google.com/file/d/1v6IkFw4dHvPhL_uH_IEpLXTZOSYampZy/view?usp=drive_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-neutral-900 border border-neutral-800 px-5 py-2 rounded-full hover:border-neutral-400 hover:text-white transition-all duration-200 ease-out font-semibold tracking-wide ml-2 sm:ml-0"
         >
           Resume
         </a>
